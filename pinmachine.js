@@ -9,12 +9,6 @@ var renderer;
 
 var cube, cube2, plane;
 
-var targetRotation = 0;
-var targetRotationOnMouseDown = 0;
-
-var mouseX = 0;
-var mouseXOnMouseDown = 0;
-
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
 
@@ -195,83 +189,16 @@ function init() {
 	renderer.setSize( parseInt(SCREEN_WIDTH*.8), parseInt(SCREEN_HEIGHT*.7));
 	
 	container.appendChild( renderer.domElement );
-
-	document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-	document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-	document.addEventListener( 'touchmove', onDocumentTouchMove, false );
 }
 
-//
-
-function onDocumentMouseDown( event ) {
-
-	event.preventDefault();
-
-	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-	document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-	document.addEventListener( 'mouseout', onDocumentMouseOut, false );
-
-	mouseXOnMouseDown = event.clientX - windowHalfX;
-	targetRotationOnMouseDown = targetRotation;
-}
-
-function onDocumentMouseMove( event ) {
-
-	mouseX = event.clientX - windowHalfX;
-
-	targetRotation = targetRotationOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.02;
-}
-
-function onDocumentMouseUp( event ) {
-
-	document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
-	document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
-	document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
-}
-
-function onDocumentMouseOut( event ) {
-
-	document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
-	document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
-	document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
-}
-
-function onDocumentTouchStart( event ) {
-
-	if ( event.touches.length == 1 ) {
-
-		event.preventDefault();
-
-		mouseXOnMouseDown = event.touches[ 0 ].pageX - windowHalfX;
-		targetRotationOnMouseDown = targetRotation;
-
-	}
-}
-
-function onDocumentTouchMove( event ) {
-
-	if ( event.touches.length == 1 ) {
-
-		event.preventDefault();
-
-		mouseX = event.touches[ 0 ].pageX - windowHalfX;
-		targetRotation = targetRotationOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.05;
-
-	}
-}
-
-//
 animation_stop = 5;
 pin_movements = []
 pin_move_flag = false;
 animation_counter = 0;
 
 function loop() {
-
-	//plane.rotation.z = cube.rotation.y += ( targetRotation - cube.rotation.y ) * 0.05;
-	//cube.rotation.y += ( targetRotation - cube.rotation.y ) * 0.05;
-	if (pin_move_flag) {
-	    //console.log('Moving!')
+    if (pin_move_flag) {
+        //console.log('Moving!')
         for (var i=0; i<40; i++) {
             pins[i].position.y += 40*pin_movements[i];
         }
@@ -282,7 +209,5 @@ function loop() {
             animation_counter = 0;
         }
     }
-
-	renderer.render(scene, camera);
+    renderer.render(scene, camera);
 }
-
