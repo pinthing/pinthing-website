@@ -19,7 +19,7 @@ var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
 
 init();
-setInterval(loop, 5000/60);
+setInterval(loop, 1000/10);   // about 12 frames per second
 
 function box(width, height, depth, x, y, z){ 
     width = width | 100;
@@ -138,11 +138,10 @@ function bitmap(char){
 
 
 function init() {
-
 	container = document.createElement('div');
 	container.style.left = 'auto';
 	container.style.right = 'auto';
-    container.style.textAlign = 'center';
+        container.style.textAlign = 'center';
 	document.body.appendChild(container);
 
 	var info = document.createElement('div');
@@ -156,7 +155,7 @@ function init() {
 
 	//camera = new THREE.Camera( 70, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 10000 );
 	camera = new THREE.Camera( 50, 1.4, 1, 10000 );
-    camera.position.x = -600;
+        camera.position.x = -600;
 	camera.position.y = 1500;
 	camera.position.z = 1300;
 	camera.target.position.y = 200;
@@ -172,24 +171,24 @@ function init() {
 	directionalLight.position.y = 0.78;
 	directionalLight.position.z = -0.09;
 	
-    directionalLight.position.normalize();
+        directionalLight.position.normalize();
 	scene.addLight( directionalLight );
 
 	var pointLight = new THREE.PointLight( 0xff0000, 1 );
 	scene.addLight( pointLight );
 
 
-    // Pins
-    var x = 0;
-    pins = []
-    for (var i=-600; i<=550; i+=150) {
-        for (var j=-350; j<=350; j+=150) {
-            var pin = box(10, 300, 10, j, 100, i);
-            pins[x] = pin
-            scene.addObject( pin );  
-            x++;
-        }
-    }  
+        // Pins
+        var x = 0;
+        pins = []
+        for (var i=-600; i<=550; i+=150) {
+            for (var j=-350; j<=350; j+=150) {
+                var pin = box(10, 300, 10, j, 100, i);
+                pins[x] = pin
+                scene.addObject( pin );  
+                x++;
+            }
+        }  
     
 
 	renderer = new THREE.CanvasRenderer();
