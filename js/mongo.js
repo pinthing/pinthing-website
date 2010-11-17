@@ -276,14 +276,8 @@ MongoHandler.prototype = {
   // help command
   _help: function() {
       return PTAG('HELP') + 
-             PTAG('Note: Only a subset of MongoDB\'s features are provided here.') +
-             PTAG('For everything else, download and install at mongodb.org.') +
-             PTAG('db.foo.help()                 help on collection methods') +
-             PTAG('db.foo.find()                 list objects in collection foo') +
-             PTAG('db.foo.save({a: 1})           save a document to collection foo') +
-             PTAG('db.foo.update({a: 1}, {a: 2}) update document where a == 1') +
-             PTAG('db.foo.find({a: 1})           list objects in foo where a == 1') +
-             PTAG('it                            use to further iterate over a cursor');
+             PTAG('show(\'1\')                     show the number 1 as a glyph') +
+             PTAG('show(1)                       raise pin 1');
 
   },
 
