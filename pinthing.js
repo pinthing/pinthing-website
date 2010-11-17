@@ -147,7 +147,7 @@ function init() {
 	info.style.bottom = '1px';
 	info.style.width = '100%';
 	info.style.textAlign = 'center';
-	info.innerHTML = 'PinMachine';
+	info.innerHTML = 'PinThing';
 	container.appendChild(info);
 
 	//camera = new THREE.Camera( 70, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 10000 );
