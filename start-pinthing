@@ -1,2 +1,2 @@
 #!/bin/sh
-rackup -p 9292 config.ru
+rackup -p 8080 config.ru
