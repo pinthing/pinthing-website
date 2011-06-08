@@ -237,23 +237,9 @@ function showhelp() {
     ':load &lt;url&gt; - to inject new DOM',
     ':load &lt;script_url&gt; - to inject external library',
     '      load also supports following shortcuts: <br />      jquery, underscore, prototype, mootools, dojo, rightjs, coffeescript, yui.<br />      eg. :load jquery',
-    ':listen [id] - to start <a href="/remote-debugging.html">remote debugging</a> session',
     ':clear - to clear the history (accessed using cursor keys)',
     ':about',
-    '',
-    'Directions to <a href="/inject.html">inject</a> JS Console in to any page (useful for mobile debugging)'
   ];
-    
-  if (injected) {
-    commands.push(':close - to hide the JS Console');
-  }
-  
-  // commands = commands.concat([
-  //   'up/down - cycle history',
-  //   'shift+up - single line command',
-  //   'shift+down - multiline command', 
-  //   'shift+enter - to run command in multiline mode'
-  // ]);
   
   return commands.join('\n');
 }
@@ -548,7 +534,9 @@ function setHistory(history) {
 }
 
 function about() {
-  return 'Built by <a target="_new" href="http://twitter.com/rem">@rem</a>';
+  return 'pinthing by <a target="_new" href="http://twitter.com/hugs">@hugs</a><br/>' + 
+         'three.js by <a target="_new" href="http://twitter.com/mrdoob">@mrdoob</a><br/>' +
+         'jsconsole by <a target="_new" href="http://twitter.com/rem">@rem</a>';
 }
 
 
@@ -579,7 +567,7 @@ var exec = document.getElementById('exec'),
         mootools: 'http://ajax.googleapis.com/ajax/libs/mootools/1/mootools-yui-compressed.js',
         underscore: 'http://documentcloud.github.com/underscore/underscore-min.js',
         rightjs: 'http://rightjs.org/hotlink/right.js',
-        coffeescript: 'http://jashkenas.github.com/coffee-script/extras/coffee-script.js',
+        coffeescript: 'js/coffee-script.js',
         yui: 'http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js'
     },
     body = document.getElementsByTagName('body')[0],
@@ -607,48 +595,6 @@ var exec = document.getElementById('exec'),
           return 'noop';
         }
       },
-      listen: function (id) {
-        // place script request for new listen ID and start SSE
-        var script = document.createElement('script'),
-            callback = '_cb' + +new Date;
-        script.src = '/remote/' + (id||'') + '?callback=' + callback;
-
-        window[callback] = function (id) {
-          remoteId = id;
-          if (sse !== null) sse.close();
-
-          sse = new EventSource('/remote/' + id + '/log');
-          sse.onopen = function () {
-            remoteId = id;
-            window.top.info('Connected to "' + id + '"\n\n<script src="http://jsconsole.com/remote.js?' + id + '"></script>');
-          };
-
-          sse.onmessage = function (event) {
-            var data = JSON.parse(event.data);
-            if (data.type && data.type == 'error') {
-              post(data.cmd, true, ['error', data.response]);
-            } else if (data.type && data.type == 'info') {
-              window.top.info(data.response);
-            } else {
-              if (data.cmd != 'remote console.log') data.response = data.response.substr(1, data.response.length - 2); // fiddle to remove the [] around the repsonse
-              echo(data.cmd);
-              log(data.response, 'response');
-            }
-          };
-
-          sse.onclose = function () {
-            window.top.info('Remote connection closed');
-            remoteId = null;
-          };
-
-          try {
-            body.removeChild(script);
-            delete window[callback];
-          } catch (e) {}
-        };
-        body.appendChild(script);
-        return 'Creating connection...';
-      }
     },
     // I hate that I'm browser sniffing, but there's issues with Firefox and execCommand so code completion won't work
     iOSMobile = navigator.userAgent.indexOf('AppleWebKit') !== -1 && navigator.userAgent.indexOf('Mobile') !== -1,
