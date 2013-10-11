@@ -3,7 +3,7 @@ function load_bitmap( the_bitmap ){
         converted = {};
     
     for (var key in the_bitmap) {
-        binary_string = the_bitmap[key].join('').replace(/\./g,'0').replace(/o/g,'1');
+        binary_string = the_bitmap[key].join('').replace(/ /g,'0').replace(/o/g,'1');
         converted[key] = convert_to_decimal(binary_string);
     }
     return converted

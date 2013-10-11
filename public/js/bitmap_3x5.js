@@ -1,58 +1,82 @@
+// TODO: Use Unicode characters: ■ and □
+
 bitmap_3x5_source = {
-  'flat':
-    [".....",
-     ".....",
-     "....."],
+  ' ':
+    ["   ",
+     "   ",
+     "   ",
+     "   ",     
+     "   "],
 
   '0':
-    ["ooooo",
-     "o...o",
-     "ooooo"],
+    ["ooo",
+     "o o",
+     "o o",
+     "o o",
+     "ooo"],
 
   '1':
-    [".....",
-     ".....",
-     "ooooo"],
+    ["  o",
+     "  o",
+     "  o",
+     "  o",
+     "  o"],
 
   '2':
-    ["ooo.o",
-     "o.o.o",
-     "o.ooo"],
+    ["ooo",
+     "  o",
+     "ooo",
+     "o  ",     
+     "ooo"],
 
   '3':
-    ["o.o.o",
-     "o.o.o",
-     "ooooo"],
+    ["ooo",
+     "  o",
+     "ooo",
+     "  o",     
+     "ooo"],
 
   '4':
-    ["..ooo",
-     "..o..",
-     "ooooo"],
+    ["o o",
+     "o o",
+     "ooo",
+     "  o",     
+     "  o"],
 
   '5':
-    ["o.ooo",
-     "o.o.o",
-     "ooo.o"],
+    ["ooo",
+     "o  ",
+     "ooo",
+     "  o",     
+     "ooo"],
 
   '6':
-    ["ooooo",
-     "o.o.o",
-     "ooo.o"],
+    ["ooo",
+     "o  ",
+     "ooo",
+     "o o",     
+     "ooo"],
 
   '7':
-    ["....o",
-     "....o",
-     "ooooo"],
+    ["ooo",
+     "  o",
+     "  o",
+     "  o",
+     "  o"],
 
   '8':
-    ["ooooo",
-     "o.o.o",
-     "ooooo"],
+    ["ooo",
+     "o o",
+     "ooo",
+     "o o",
+     "ooo"],
 
   '9':
-    ["o.ooo",
-     "o.o.o",
-     "ooooo"]
+    ["ooo",
+     "o o",
+     "ooo",
+     "  o",
+     "  o"]
 }
     
 bitmap_3x5 = load_bitmap(bitmap_3x5_source);
