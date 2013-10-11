@@ -35,7 +35,25 @@ THREE.OrbitControls = function ( object, domElement ) {
     this.maxDistance = Infinity;
 
     // 65 /*A*/, 83 /*S*/, 68 /*D*/
-    this.keys = { LEFT: 37, UP: 38, RIGHT: 39, BOTTOM: 40, ROTATE: 65, ZOOM: 83, PAN: 68 };
+    this.keys = { LEFT: 37, 
+                    UP: 38, 
+                 RIGHT: 39, 
+                BOTTOM: 40, 
+                ROTATE: 65, 
+                  ZOOM: 83, 
+                   PAN: 68, 
+                  ZERO: 48,
+                   ONE: 49,
+                   TWO: 50,
+                 THREE: 51,
+                  FOUR: 52,
+                  FIVE: 53,
+                   SIX: 54,
+                 SEVEN: 55,
+                 EIGHT: 56,
+                  NINE: 57,
+                 SPACE: 32
+                   };
 
     // internals
 
@@ -345,13 +363,12 @@ THREE.OrbitControls = function ( object, domElement ) {
     }
 
     function onKeyDown( event ) {
-
         if ( scope.enabled === false ) return;
         if ( scope.userPan === false ) return;
 
         switch ( event.keyCode ) {
-
-            /*case scope.keys.UP:
+            /*
+            case scope.keys.UP:
                 scope.pan( new THREE.Vector3( 0, 1, 0 ) );
                 break;
             case scope.keys.BOTTOM:
@@ -364,6 +381,39 @@ THREE.OrbitControls = function ( object, domElement ) {
                 scope.pan( new THREE.Vector3( 1, 0, 0 ) );
                 break;
             */
+            case scope.keys.SPACE:
+                show(' ');
+                break;            
+            case scope.keys.ZERO:
+                show('0');
+                break;            
+            case scope.keys.ONE:
+                show('1');
+                break;
+            case scope.keys.TWO:
+                show('2');
+                break;
+            case scope.keys.THREE:
+                show('3');
+                break;
+            case scope.keys.FOUR:
+                show('4');
+                break;
+            case scope.keys.FIVE:
+                show('5');
+                break;
+            case scope.keys.SIX:
+                show('6');
+                break;
+            case scope.keys.SEVEN:
+                show('7');
+                break;
+            case scope.keys.EIGHT:
+                show('8');
+                break;
+            case scope.keys.NINE:
+                show('9');
+                break;                                                                                                
             case scope.keys.ROTATE:
                 state = STATE.ROTATE;
                 break;
