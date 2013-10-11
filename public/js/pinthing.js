@@ -1,3 +1,4 @@
+// PinThing - https://github.com/pinthing/pinthing.com
 var scene, camera, brush, plane, projector, renderer, controls,
     objectHovered;
 
