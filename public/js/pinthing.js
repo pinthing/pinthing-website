@@ -1,6 +1,6 @@
 // PinThing - https://github.com/pinthing/pinthing.com
 var scene, camera, brush, plane, projector, renderer, controls,
-    objectHovered;
+    objectHovered, objectFocusAtMouseDown, objectFocusAtMouseUp;
 
 init();
 animate();
@@ -78,7 +78,8 @@ function init() {
     // Events
     THREEx.WindowResize(renderer, camera);
     document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-    document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+    //document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+    document.addEventListener( 'mousedown', onDocumentMouseDown, false );
     
 }
 
@@ -118,33 +119,84 @@ function onDocumentMouseMove( event ) {
 }
 
 function onDocumentMouseUp( event ) {
-    if ( objectHovered ) {
-        if (Math.round(objectHovered.scale.y * 10) / 10 == 0.1) {
-            var tween = new TWEEN.Tween( { y: .1, pin: objectHovered} )
-               .to( { y: 1 }, 250 )
-               .easing( TWEEN.Easing.Cubic.InOut )
-               .onUpdate( function () {
-                    this.pin.scale.y = this.y;
-                    this.pin.position.y = 25*this.y;
-                    this.pin.material.ambient.r = 1 - this.y;
-                    this.pin.material.ambient.g = 1 - this.y;
-                    this.pin.material.ambient.b = 1 - this.y;
-                })
-                .onComplete( function() {   
-                }).start();
-        } else {
-            var tween = new TWEEN.Tween( { y: 1, pin: objectHovered} )
-               .to( { y: .1 }, 250 )
-               .easing( TWEEN.Easing.Cubic.InOut )
-               .onUpdate( function () {
-                    this.pin.scale.y = this.y;
-                    this.pin.position.y = 25*this.y;
-                    this.pin.material.ambient.r = 1 - this.y;
-                    this.pin.material.ambient.g = 1 - this.y;
-                    this.pin.material.ambient.b = 1 - this.y;
-                })
-                .onComplete( function() {
-                }).start();
+    event.preventDefault();
+
+    // Find mouse position mapped to the 3D scene
+    var vector = new THREE.Vector3( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1, 0.5 );
+    projector.unprojectVector( vector, camera );
+    var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+
+    // Create an array containing all objects in the scene with which the ray intersects
+    intersects = raycaster.intersectObjects( scene.children );
+    
+    if ( objectFocusAtMouseUp ) {
+        objectFocusAtMouseUp = null;
+    }
+
+    // if there is one (or more) intersections
+    if ( intersects.length > 0 ) {
+        intersect = intersects[ 0 ].object == brush ? intersects[ 1 ] : intersects[ 0 ];
+        if (intersect) {
+            if ( intersect.object != plane ) {
+                objectFocusAtMouseUp = intersect.object;
+            }
+        }
+    }
+    if ( objectFocusAtMouseDown && objectFocusAtMouseUp ) {
+        if (objectFocusAtMouseDown.uuid === objectFocusAtMouseUp.uuid) {
+            if (Math.round(objectFocusAtMouseUp.scale.y * 10) / 10 == 0.1) {
+                var tween = new TWEEN.Tween( { y: .1, pin: objectFocusAtMouseUp} )
+                   .to( { y: 1 }, 250 )
+                   .easing( TWEEN.Easing.Cubic.InOut )
+                   .onUpdate( function () {
+                        this.pin.scale.y = this.y;
+                        this.pin.position.y = 25*this.y;
+                        this.pin.material.ambient.r = 1 - this.y;
+                        this.pin.material.ambient.g = 1 - this.y;
+                        this.pin.material.ambient.b = 1 - this.y;
+                    })
+                    .onComplete( function() {   
+                    }).start();
+            } else {
+                var tween = new TWEEN.Tween( { y: 1, pin: objectFocusAtMouseUp} )
+                   .to( { y: .1 }, 250 )
+                   .easing( TWEEN.Easing.Cubic.InOut )
+                   .onUpdate( function () {
+                        this.pin.scale.y = this.y;
+                        this.pin.position.y = 25*this.y;
+                        this.pin.material.ambient.r = 1 - this.y;
+                        this.pin.material.ambient.g = 1 - this.y;
+                        this.pin.material.ambient.b = 1 - this.y;
+                    })
+                    .onComplete( function() {
+                    }).start();
+            }
+        }
+    }
+}
+
+function onDocumentMouseDown( event ) {
+    event.preventDefault();
+
+    // Find mouse position mapped to the 3D scene
+    var vector = new THREE.Vector3( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1, 0.5 );
+    projector.unprojectVector( vector, camera );
+    var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+
+    // Create an array containing all objects in the scene with which the ray intersects
+    intersects = raycaster.intersectObjects( scene.children );
+    
+    if ( objectFocusAtMouseDown ) {
+        objectFocusAtMouseDown = null;
+    }
+
+    // if there is one (or more) intersections
+    if ( intersects.length > 0 ) {
+        intersect = intersects[ 0 ].object == brush ? intersects[ 1 ] : intersects[ 0 ];
+        if (intersect) {
+            if ( intersect.object != plane ) {
+                objectFocusAtMouseDown = intersect.object;
+            }
         }
     }
 }
