@@ -366,8 +366,6 @@ THREE.OrbitControls = function ( object, domElement ) {
         if ( scope.enabled === false ) return;
         if ( scope.userPan === false ) return;
 
-        event.preventDefault();
-
         switch ( event.keyCode ) {
             /*
             case scope.keys.UP:
