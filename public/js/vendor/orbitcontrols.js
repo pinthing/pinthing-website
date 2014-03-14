@@ -67,8 +67,24 @@ THREE.OrbitControls = function ( object, domElement ) {
 	// Set to true to disable use of the keys
 	this.noKeys = false;
 
-	// The four arrow keys
-	this.keys = { LEFT: 37, UP: 38, RIGHT: 39, BOTTOM: 40 };
+	// Keymap
+    this.keys = { LEFT: 37, 
+                    UP: 38, 
+                 RIGHT: 39, 
+                BOTTOM: 40, 
+                  ZERO: 48,
+                   ONE: 49,
+                   TWO: 50,
+                 THREE: 51,
+                  FOUR: 52,
+                  FIVE: 53,
+                   SIX: 54,
+                 SEVEN: 55,
+                 EIGHT: 56,
+                  NINE: 57,
+                 SPACE: 32
+                };
+
 
 	////////////
 	// internals
@@ -470,6 +486,50 @@ THREE.OrbitControls = function ( object, domElement ) {
 				scope.pan( - scope.keyPanSpeed, 0 );
 				scope.update();
 				break;
+
+            case scope.keys.SPACE:
+                show(' ');
+                break;            
+
+            case scope.keys.ZERO:
+                show('0');
+                break;            
+
+            case scope.keys.ONE:
+                show('1');
+                break;
+
+            case scope.keys.TWO:
+                show('2');
+                break;
+
+            case scope.keys.THREE:
+                show('3');
+                break;
+
+            case scope.keys.FOUR:
+                show('4');
+                break;
+
+            case scope.keys.FIVE:
+                show('5');
+                break;
+
+            case scope.keys.SIX:
+                show('6');
+                break;
+
+            case scope.keys.SEVEN:
+                show('7');
+                break;
+
+            case scope.keys.EIGHT:
+                show('8');
+                break;
+
+            case scope.keys.NINE:
+                show('9');
+                break;     
 
 		}
 
