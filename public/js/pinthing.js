@@ -1,11 +1,14 @@
 // PinThing - https://github.com/pinthing/pinthing.com
 var scene, camera, brush, plane, projector, renderer, controls,
-    objectHovered, objectFocusAtMouseDown, objectFocusAtMouseUp;
+    objectHovered, objectFocusAtMouseDown, objectFocusAtMouseUp,
+    isMouseDown = false, onMouseDownPosition;
 
 init();
 animate();
 
 function init() {
+    onMouseDownPosition = new THREE.Vector2();
+
     // Scene
     scene = new THREE.Scene();
 
@@ -78,7 +81,7 @@ function init() {
     // Events
     THREEx.WindowResize(renderer, camera);
     document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-    //document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+    document.addEventListener( 'mouseup', onDocumentMouseUp, false );
     document.addEventListener( 'mousedown', onDocumentMouseDown, false );
     
 }
@@ -177,6 +180,10 @@ function onDocumentMouseUp( event ) {
 
 function onDocumentMouseDown( event ) {
     event.preventDefault();
+
+    isMouseDown = true;
+    onMouseDownPosition.x = event.clientX;
+    onMouseDownPosition.y = event.clientY;
 
     // Find mouse position mapped to the 3D scene
     var vector = new THREE.Vector3( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1, 0.5 );
