@@ -1,0 +1,29 @@
+{
+  "name": "pinthing-website",
+  "version": "1.0.0",
+  "description": "The website code for pinthing.com (A motorized version of the classic \"pin art\" desk toy.)",
+  "author": "Jason Huggins",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pinthing/pinthing-website.git"
+  },
+  "keywords": [
+    "pinthing",
+    "pinart"
+  ],  
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.17.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1"
+  },
+  "engines": {
+      "node": "16.x"
+    }  
+}
