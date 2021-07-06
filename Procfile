@@ -1,1 +1,1 @@
-web: bundle exec ruby pinthing.rb -p $PORT
+web: npm start
