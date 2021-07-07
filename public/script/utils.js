@@ -746,8 +746,8 @@ scene.add(createButton("button-label", "Show time: ", 450, 150, -9, 2.5))
 // scene.add(createButton("button-label", "Full Screen: ", 525, 150, -7.6, -2.5))
 
 loadSVG()
-startClock()
-//setTimeout(function() { scene.getObjectByName('checkmark').visible = false }, 100)
+//startClock()
+setTimeout(function() { scene.getObjectByName('checkmark').visible = false }, 200)
 
 // Set Current Time
 //pinthing.set(get_char(new Date().getHours()) | get_char(new Date().getMinutes().toString().padStart(2,'0'), 8) | 2n**21n | 2n**51n)
