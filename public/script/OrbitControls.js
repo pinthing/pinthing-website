@@ -87,8 +87,8 @@ class OrbitControls extends EventDispatcher {
 		this.autoRotate = false;
 		this.autoRotateSpeed = 2.0; // 30 seconds per orbit when fps is 60
 
-		// The four arrow keys
-		this.keys = { LEFT: 'ArrowLeft', UP: 'ArrowUp', RIGHT: 'ArrowRight', BOTTOM: 'ArrowDown', SPACE: 'Space' };
+		// Keyboard controls
+		this.keys = { LEFT: 'ArrowLeft', UP: 'ArrowUp', RIGHT: 'ArrowRight', BOTTOM: 'ArrowDown', SPACE: 'Space', G: 'KeyG', S: 'KeyS'};
 
 		// Mouse buttons
 		this.mouseButtons = { LEFT: MOUSE.ROTATE, MIDDLE: MOUSE.DOLLY, RIGHT: MOUSE.PAN };
@@ -611,41 +611,44 @@ class OrbitControls extends EventDispatcher {
 
 				case scope.keys.UP:
 					//console.log('keyUp')
-					snakeGame.changeDirection(0,-1)
+					if (snakeGameRunning == true) { snakeGame.changeDirection(0,-1) }
 					needsUpdate = true;
 					break;
 
 				case scope.keys.BOTTOM:
 					//console.log('keyDown')
-					snakeGame.changeDirection(0,1)
+					if (snakeGameRunning == true) { snakeGame.changeDirection(0,1) }
 					needsUpdate = true;
 					break;
 
 				case scope.keys.LEFT:
 					//console.log('keyLeft')
-					snakeGame.changeDirection(-1,0)
+					if (snakeGameRunning == true) { snakeGame.changeDirection(-1,0) }
 					needsUpdate = true;
 					break;
 
 				case scope.keys.RIGHT:
 					//console.log('keyRight')
-					snakeGame.changeDirection(1,0)
+					if (snakeGameRunning == true) { snakeGame.changeDirection(1,0) }
 					needsUpdate = true;
 					break;
 
 				case scope.keys.SPACE:
 					//console.log('space')
-
-					//One clock pulse of the snake game
-					snakeGame.moveHead()
-					if (!snakeGame.endGame) {
-						snakeGame.removeTail()
-						pinthing.set(snakeGame.gameState)
-					} else {snakeGame.gameOver()}
-
+					snakeGame.startSnake()		//Pauses and unpauses the snake game
+					needsUpdate = true;
+					break;
+				case scope.keys.G:
+					//console.log('g')
+					//This may eventually be used to pull up a selection of multiple games (thus the "g")
 					needsUpdate = true;
 					break;
 
+				case scope.keys.S:
+					//console.log('s')
+					snakeGame.startGame()		//Starts or stops the snake game
+					needsUpdate = true;
+					break;
 			}
 
 			if ( needsUpdate ) {
