@@ -30,10 +30,10 @@ class OrbitControls extends EventDispatcher {
 
 		this.object = object;
 		this.domElement = domElement;
-  
+
     // jrh - begin
     this.scene = scene;
-    // jrh - end  
+    // jrh - end
 
 		// Set to false to disable this control
 		this.enabled = true;
@@ -43,10 +43,10 @@ class OrbitControls extends EventDispatcher {
 
 		// How far you can dolly in and out ( PerspectiveCamera only )
 		this.minDistance = 0;
-    // jrh - begin    
+    // jrh - begin
     // this.maxDistance = Infinity;
 		this.maxDistance = 300;
-    // jrh - end      
+    // jrh - end
 
 		// How far you can zoom in and out ( OrthographicCamera only )
 		this.minZoom = 0;
@@ -87,8 +87,8 @@ class OrbitControls extends EventDispatcher {
 		this.autoRotate = false;
 		this.autoRotateSpeed = 2.0; // 30 seconds per orbit when fps is 60
 
-		// The four arrow keys
-		this.keys = { LEFT: 'ArrowLeft', UP: 'ArrowUp', RIGHT: 'ArrowRight', BOTTOM: 'ArrowDown' };
+		// Keyboard controls
+		this.keys = { LEFT: 'ArrowLeft', UP: 'ArrowUp', RIGHT: 'ArrowRight', BOTTOM: 'ArrowDown', SPACE: 'Space', G: 'KeyG', S: 'KeyS'};
 
 		// Mouse buttons
 		this.mouseButtons = { LEFT: MOUSE.ROTATE, MIDDLE: MOUSE.DOLLY, RIGHT: MOUSE.PAN };
@@ -610,29 +610,45 @@ class OrbitControls extends EventDispatcher {
 			switch ( event.code ) {
 
 				case scope.keys.UP:
-					console.log('keyUp')
-					pan( 0, scope.keyPanSpeed );
+					//console.log('keyUp')
+					if (snakeGameRunning == true) { snakeGame.changeDirection(0,-1) }
 					needsUpdate = true;
 					break;
 
 				case scope.keys.BOTTOM:
-					console.log('keyDown')					
-					pan( 0, - scope.keyPanSpeed );
+					//console.log('keyDown')
+					if (snakeGameRunning == true) { snakeGame.changeDirection(0,1) }
 					needsUpdate = true;
 					break;
 
 				case scope.keys.LEFT:
-					console.log('keyLeft')					
-					pan( scope.keyPanSpeed, 0 );
+					//console.log('keyLeft')
+					if (snakeGameRunning == true) { snakeGame.changeDirection(-1,0) }
 					needsUpdate = true;
 					break;
 
 				case scope.keys.RIGHT:
-					console.log('keyRight')					
-					pan( - scope.keyPanSpeed, 0 );
+					//console.log('keyRight')
+					if (snakeGameRunning == true) { snakeGame.changeDirection(1,0) }
 					needsUpdate = true;
 					break;
 
+				case scope.keys.SPACE:
+					//console.log('space')
+					snakeGame.startSnake()		//Pauses and unpauses the snake game
+					needsUpdate = true;
+					break;
+				case scope.keys.G:
+					//console.log('g')
+					//This may eventually be used to pull up a selection of multiple games (thus the "g")
+					needsUpdate = true;
+					break;
+
+				case scope.keys.S:
+					//console.log('s')
+					snakeGame.startGame()		//Starts or stops the snake game
+					needsUpdate = true;
+					break;
 			}
 
 			if ( needsUpdate ) {
@@ -853,10 +869,10 @@ class OrbitControls extends EventDispatcher {
 		function onMouseDown( event ) {
 
 			// Prevent the browser from scrolling.
-      
+
       // JRH - begin - 25 May 2021
 			//event.preventDefault();
-      // JRH - end   
+      // JRH - end
 
 			// Manually set the focus since calling preventDefault above
 			// prevents the browser from setting it automatically.
@@ -966,7 +982,7 @@ class OrbitControls extends EventDispatcher {
 			if ( scope.enabled === false ) return;
 
 			event.preventDefault();
-      
+
       // jrh - begin
       // var plane = scope.scene.getObjectByName("plane")
       // var button = scope.scene.getObjectByName("button")
@@ -977,7 +993,7 @@ class OrbitControls extends EventDispatcher {
         // plane.visible = false
         // button.visible = false
       // }
-      // jrh - end         
+      // jrh - end
 
 			switch ( state ) {
 
@@ -1052,7 +1068,7 @@ class OrbitControls extends EventDispatcher {
 
       // JRH - begin - 31 May 2021
 			//event.preventDefault(); // prevent scrolling
-      // JRH - end         
+      // JRH - end
 
 			switch ( event.touches.length ) {
 
@@ -1150,7 +1166,7 @@ class OrbitControls extends EventDispatcher {
         // plane.visible = false
         // button.visible = false
       // }
-      // jrh - end  
+      // jrh - end
 
 			switch ( state ) {
 

@@ -85,49 +85,49 @@ var bitmap_3x5 = {
      "o o o",
      "o o o",
      "ooo o"],
-  
+
   '02':
     ["ooo ooo",
      "o o   o",
      "o o ooo",
      "o o o  ",
      "ooo ooo"],
-  
+
   '03':
     ["ooo ooo",
      "o o   o",
      "o o ooo",
      "o o   o",
-     "ooo ooo"],   
-  
+     "ooo ooo"],
+
   '04':
     ["ooo o o",
      "o o o o",
      "o o ooo",
      "o o   o",
      "ooo   o"],
-  
+
   '05':
     ["ooo ooo",
      "o o o  ",
      "o o ooo",
      "o o   o",
-     "ooo ooo"],   
-  
+     "ooo ooo"],
+
   '06':
     ["ooo ooo",
      "o o o  ",
      "o o ooo",
      "o o o o",
      "ooo ooo"],
-  
+
   '07':
     ["ooo ooo",
      "o o   o",
      "o o   o",
      "o o   o",
-     "ooo   o"], 
-  
+     "ooo   o"],
+
   '08':
     ["ooo ooo",
      "o o o o",
@@ -140,7 +140,7 @@ var bitmap_3x5 = {
      "o o o o",
      "o o ooo",
      "o o   o",
-     "ooo   o"],      
+     "ooo   o"],
 
   '10':
     ["o ooo",
@@ -210,7 +210,7 @@ var bitmap_3x5 = {
      "o o o",
      "o ooo",
      "o   o",
-     "o   o"],   
+     "o   o"],
 
   '20':
     ["ooo ooo",
@@ -218,20 +218,20 @@ var bitmap_3x5 = {
      "ooo o o",
      "o   o o",
      "ooo ooo"],
-  
+
   '21':
     ["ooo o",
      "  o o",
      "ooo o",
      "o   o",
      "ooo o"],
-  
+
   '22':
     ["ooo ooo",
      "  o   o",
      "ooo ooo",
      "o   o  ",
-     "ooo ooo"],  
+     "ooo ooo"],
 
   '23':
     ["ooo ooo",
@@ -239,7 +239,7 @@ var bitmap_3x5 = {
      "ooo ooo",
      "o     o",
      "ooo ooo"],
-  
+
   '24':
     ["ooo o o",
      "  o o o",
@@ -253,175 +253,175 @@ var bitmap_3x5 = {
      "ooo ooo",
      "o     o",
      "ooo ooo"],
-  
+
   '26':
     ["ooo ooo",
      "  o o  ",
      "ooo ooo",
      "o   o o",
-     "ooo ooo"],   
-  
+     "ooo ooo"],
+
   '27':
     ["ooo ooo",
      "  o   o",
      "ooo   o",
      "o     o",
-     "ooo   o"],   
-  
+     "ooo   o"],
+
   '28':
     ["ooo ooo",
      "  o o o",
      "ooo ooo",
      "o   o o",
-     "ooo ooo"],   
-  
+     "ooo ooo"],
+
   '29':
     ["ooo ooo",
      "  o o o",
      "ooo ooo",
      "o     o",
-     "ooo   o"],  
-  
+     "ooo   o"],
+
   '30':
     ["ooo ooo",
      "  o o o",
      "ooo o o",
      "  o o o",
      "ooo ooo"],
-  
+
   '31':
     ["ooo o",
      "  o o",
      "ooo o",
      "  o o",
      "ooo o"],
-  
+
   '32':
     ["ooo ooo",
      "  o   o",
      "ooo ooo",
      "  o o  ",
      "ooo ooo"],
-  
+
   '33':
     ["ooo ooo",
      "  o   o",
      "ooo ooo",
      "  o   o",
      "ooo ooo"],
-  
+
   '34':
     ["ooo o o",
      "  o o o",
      "ooo ooo",
      "  o   o",
-     "ooo   o"],    
-  
+     "ooo   o"],
+
   '35':
     ["ooo ooo",
      "  o o  ",
      "ooo ooo",
      "  o   o",
-     "ooo ooo"],  
-  
+     "ooo ooo"],
+
   '36':
     ["ooo ooo",
      "  o o  ",
      "ooo ooo",
      "  o o o",
-     "ooo ooo"],    
-    
+     "ooo ooo"],
+
   '37':
     ["ooo ooo",
      "  o   o",
      "ooo   o",
      "  o   o",
-     "ooo   o"],     
-    
+     "ooo   o"],
+
   '38':
     ["ooo ooo",
      "  o o o",
      "ooo ooo",
      "  o o o",
-     "ooo ooo"],    
-  
+     "ooo ooo"],
+
   '39':
     ["ooo ooo",
      "  o o o",
      "ooo ooo",
      "  o   o",
-     "ooo   o"],   
-   
+     "ooo   o"],
+
   '40':
     ["o o ooo",
      "o o o o",
      "ooo o o",
      "  o o o",
-     "  o ooo"],    
-  
+     "  o ooo"],
+
   '41':
     ["o o o",
      "o o o",
      "ooo o",
      "  o o",
-     "  o o"],     
-  
+     "  o o"],
+
   '42':
     ["o o ooo",
      "o o   o",
      "ooo ooo",
      "  o o  ",
-     "  o ooo"],  
-  
+     "  o ooo"],
+
   '43':
     ["o o ooo",
      "o o   o",
      "ooo ooo",
      "  o   o",
-     "  o ooo"],     
-  
+     "  o ooo"],
+
   '44':
     ["o o o o",
      "o o o o",
      "ooo ooo",
      "  o   o",
-     "  o   o"],   
-  
+     "  o   o"],
+
   '45':
     ["o o ooo",
      "o o o  ",
      "ooo ooo",
      "  o   o",
-     "  o ooo"],   
-  
+     "  o ooo"],
+
   '46':
     ["o o ooo",
      "o o o  ",
      "ooo ooo",
      "  o o o",
-     "  o ooo"],     
-  
+     "  o ooo"],
+
   '47':
     ["o o ooo",
      "o o   o",
      "ooo   o",
      "  o   o",
-     "  o   o"],  
-  
+     "  o   o"],
+
   '48':
     ["o o ooo",
      "o o o o",
      "ooo ooo",
      "  o o o",
-     "  o ooo"],  
-  
+     "  o ooo"],
+
   '49':
     ["o o ooo",
      "o o o o",
      "ooo ooo",
      "  o   o",
-     "  o   o"],  
-  
+     "  o   o"],
+
   '50':
     ["ooo ooo",
      "o   o o",
@@ -435,70 +435,70 @@ var bitmap_3x5 = {
      "ooo o",
      "  o o",
      "ooo o"],
-  
+
   '52':
     ["ooo ooo",
      "o     o",
      "ooo ooo",
      "  o o  ",
      "ooo ooo"],
-  
+
   '53':
     ["ooo ooo",
      "o     o",
      "ooo ooo",
      "  o   o",
      "ooo ooo"],
-  
+
   '54':
     ["ooo o o",
      "o   o o",
      "ooo ooo",
      "  o   o",
-     "ooo   o"], 
-  
+     "ooo   o"],
+
   '55':
     ["ooo ooo",
      "o   o  ",
      "ooo ooo",
      "  o   o",
      "ooo ooo"],
-  
+
   '56':
     ["ooo ooo",
      "o   o  ",
      "ooo ooo",
      "  o o o",
-     "ooo ooo"], 
-  
+     "ooo ooo"],
+
   '57':
     ["ooo ooo",
      "o     o",
      "ooo   o",
      "  o   o",
      "ooo   o"],
-  
+
   '58':
     ["ooo ooo",
      "o   o o",
      "ooo ooo",
      "  o o o",
-     "ooo ooo"], 
-  
+     "ooo ooo"],
+
   '59':
     ["ooo ooo",
      "o   o o",
      "ooo ooo",
      "  o   o",
-     "ooo   o"],     
-   
-  
+     "ooo   o"],
+
+
   '00':
     ["ooo ooo",
      "o o o o",
      "o o o o",
      "o o o o",
-     "ooo ooo"],          
+     "ooo ooo"],
 
 }
 
@@ -541,8 +541,8 @@ function get_char(char, shift = 0) {
 // if hour == 11, shift hour to the right 2
 // if minute starts with 1, << 1n
 // if minute ends in 1, don't shift,
-//  else >> 1n 
-// 11:00 
+//  else >> 1n
+// 11:00
 // x1
 // 11
 
@@ -556,9 +556,9 @@ function showTime(h = null, m = null) {
   // 16 pins:
   //var separator = 2n**22n | 2n**54n
   // 17 pins:
-  //var separator = 2n**21n | 2n**51n  
-  //var separator = 0n  
-  
+  //var separator = 2n**21n | 2n**51n
+  //var separator = 0n
+
   if (h == null) {
     var date_hours = new Date().getHours() % 12 || 12
   } else {
@@ -577,17 +577,17 @@ function showTime(h = null, m = null) {
     total_shift += 1n
   } else if (date_hours == 1) {
     hour_shift += 2n
-    total_shift += 2n    
+    total_shift += 2n
   } else if (date_hours > 1 && date_hours < 10) {
     hour_shift += 2n
-    total_shift += 1n     
+    total_shift += 1n
   } else if (date_hours == 11) {
     hour_shift += 2n
     total_shift += 1n
   } else if (date_hours == 22) {
     var separator = 0n
   }
-  
+
   if (date_minutes[1] == "1") {
     total_shift -= 1n
   }
@@ -603,7 +603,7 @@ function showTime(h = null, m = null) {
   // 16 pins:
   //var separator = 2n**22n | 2n**54n
   // 17 pins:
-  //var separator = 2n**21n | 2n**51n  
+  //var separator = 2n**21n | 2n**51n
   //var separator = 0n
   var time = (hours | minutes | separator) >> total_shift
   // console.log('Time: ' + date_hours + ':' + date_minutes)
@@ -615,7 +615,7 @@ function startClock() {
   clock_interval = setInterval(function() {
     if (document.visibilityState == "visible") {
       showTime()
-    } 
+    }
   }, 1000)
 }
 function stopClock() {
@@ -662,16 +662,16 @@ function loadSVG() {
   				group.add( mesh );
 
   			}
-        
+
 
   		}
       group.children[0].position.z -= .02
   		scene.add( group );
-      
+
       group.applyMatrix4(new THREE.Matrix4().makeScale(-1, 1, 1));
       group.rotation.x = Math.TAU/4
       group.rotation.y = Math.TAU
-      group.rotation.z = Math.TAU/2            
+      group.rotation.z = Math.TAU/2
       group.position.y = -1
       group.position.x = 5
       group.position.z = 2.5
@@ -715,12 +715,12 @@ var createCanvasTexture = function (width, height, text, border = false) {
       ctx.strokeStyle = '#ff0000';
       ctx.strokeRect(0.5, 0.5, canvas.width - 1, canvas.height - 1);
     }
-    ctx.fillStyle = '#ffffff'; 
-    ctx.fillStyle = '#000000';       
-    ctx.font = "80px Helvetica";    
+    ctx.fillStyle = '#ffffff';
+    ctx.fillStyle = '#000000';
+    ctx.font = "80px Helvetica";
     ctx.fillText(text, 30*2, 50*2);
-        
-    var texture = new THREE.Texture(canvas);        
+
+    var texture = new THREE.Texture(canvas);
     texture.needsUpdate = true;
     return texture;
 }
@@ -737,7 +737,7 @@ var createButton = function (name = "button", text = "", width = 0, height = 0, 
   button.position.x = x
   button.position.z = z
   button.position.y = -1
-    
+
   button.visible = true
   return button
 };
@@ -747,7 +747,7 @@ scene.add(createButton("button-label", "Show time: ", 450, 150, -9, 2.5))
 
 loadSVG()
 startClock()
-//setTimeout(function() { scene.getObjectByName('checkmark').visible = false }, 100)
+//setTimeout(function() { scene.getObjectByName('checkmark').visible = false }, 200)
 
 // Set Current Time
 //pinthing.set(get_char(new Date().getHours()) | get_char(new Date().getMinutes().toString().padStart(2,'0'), 8) | 2n**21n | 2n**51n)

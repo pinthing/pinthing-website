@@ -14,8 +14,8 @@ class PinThing {
     //plane = new THREE.Mesh( new THREE.PlaneGeometry( width*50, length*50, 32 ),
     plane = new THREE.Mesh( new THREE.BoxGeometry( width*5.0, length*5.0, .1 ),
                             new THREE.MeshBasicMaterial( { color: 0xdddddd,
-                              wireframe: false, 
-                              opacity:1, 
+                              wireframe: false,
+                              opacity:1,
                               side: THREE.DoubleSide} ) )
     plane.rotation.x = -Math.PI/2
     plane.position.set(0,-.8,0)
@@ -106,14 +106,14 @@ class PinThing {
   down() {
     this.set(0)
   }
-  
+
   random = {
     set: function() {
       var array = new Array(this.parent.pins.children.length).fill(0)
       for (var i in array) {
         array[i] = Math.round(Math.random())
       }
-      this.parent.set(array) 
+      this.parent.set(array)
     },
     start: function() {
       this.set()
@@ -123,7 +123,7 @@ class PinThing {
       clearInterval(this.parent.interval)
     }
   }
-  
+
   number2String(num, length = 0) {
     return num.toString(2).padStart(length,'0')
   }
