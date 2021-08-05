@@ -88,7 +88,7 @@ class OrbitControls extends EventDispatcher {
 		this.autoRotateSpeed = 2.0; // 30 seconds per orbit when fps is 60
 
 		// Keyboard controls
-		this.keys = { LEFT: 'ArrowLeft', UP: 'ArrowUp', RIGHT: 'ArrowRight', BOTTOM: 'ArrowDown', SPACE: 'Space', G: 'KeyG', S: 'KeyS'};
+		this.keys = { LEFT: 'ArrowLeft', UP: 'ArrowUp', RIGHT: 'ArrowRight', BOTTOM: 'ArrowDown' }
 
 		// Mouse buttons
 		this.mouseButtons = { LEFT: MOUSE.ROTATE, MIDDLE: MOUSE.DOLLY, RIGHT: MOUSE.PAN };
@@ -603,50 +603,117 @@ class OrbitControls extends EventDispatcher {
 
 		}
 
+		/**
+		 * 	this.keys = {
+		 *	LEFT: 'ArrowLeft', UP: 'ArrowUp', RIGHT: 'ArrowRight', BOTTOM: 'ArrowDown',
+		 *	SPACE: 'Space', SHIFTL: 'ShiftLeft', SHIFTR: 'ShiftRight', CONTROLL: 'ControlLeft', CONTROLR: 'ControlRight',
+		 *	C: 'KeyC', G: 'KeyG', Q: 'KeyQ', S: 'KeyS', X: 'KeyX', Z: 'KeyZ' };
+		*/
 		function handleKeyDown( event ) {
 
 			let needsUpdate = false;
+
+			//if (event.repeat) return;	//Prevents key presses from repeating; may be commented out.
 
 			switch ( event.code ) {
 
 				case scope.keys.UP:
 					//console.log('keyUp')
-					if (snakeGameRunning == true) { snakeGame.changeDirection(0,-1) }
+					if (snakeGameRunning) { snakeGame.changeDirection(0,-1) }
+					if (quadriblockGameRunning && !quadriblock.conditions.waiting) {
+						quadriblock.blockRotate(0); quadriblock.render()
+					}
 					needsUpdate = true;
 					break;
 
 				case scope.keys.BOTTOM:
 					//console.log('keyDown')
-					if (snakeGameRunning == true) { snakeGame.changeDirection(0,1) }
+					if (snakeGameRunning) { snakeGame.changeDirection(0,1) }
+					if (quadriblockGameRunning && !quadriblock.conditions.waiting) {
+						quadriblock.softdrop(); quadriblock.render()
+					}
 					needsUpdate = true;
 					break;
 
 				case scope.keys.LEFT:
 					//console.log('keyLeft')
-					if (snakeGameRunning == true) { snakeGame.changeDirection(-1,0) }
+					if (snakeGameRunning) { snakeGame.changeDirection(-1,0) }
+					if (quadriblockGameRunning && !quadriblock.conditions.waiting) {
+						quadriblock.blockTranslate(2); quadriblock.render()
+					}
 					needsUpdate = true;
 					break;
 
 				case scope.keys.RIGHT:
 					//console.log('keyRight')
-					if (snakeGameRunning == true) { snakeGame.changeDirection(1,0) }
+					if (snakeGameRunning) { snakeGame.changeDirection(1,0) }
+					if (quadriblockGameRunning && !quadriblock.conditions.waiting) {
+						quadriblock.blockTranslate(3); quadriblock.render()
+					}
 					needsUpdate = true;
 					break;
 
-				case scope.keys.SPACE:
+				case 'Space':
 					//console.log('space')
 					snakeGame.startSnake()		//Pauses and unpauses the snake game
+					if (quadriblockGameRunning && !quadriblock.conditions.waiting) {
+						quadriblock.harddrop(); quadriblock.render()
+					}
 					needsUpdate = true;
 					break;
-				case scope.keys.G:
+
+				case 'KeyG':
 					//console.log('g')
 					//This may eventually be used to pull up a selection of multiple games (thus the "g")
 					needsUpdate = true;
 					break;
 
-				case scope.keys.S:
+				case 'KeyS':
 					//console.log('s')
-					snakeGame.startGame()		//Starts or stops the snake game
+					if (!quadriblockGameRunning) { snakeGame.startGame() }
+					needsUpdate = true;			//Starts or stops the snake game
+					break;
+
+				case 'KeyQ':
+					//console.log('q)
+					if (!snakeGameRunning) { quadriblock.startGame() }
+					needsUpdate = true;			//Starts or stops a quadriblock game
+					break;
+				case 'KeyX':
+					//console.log('x')
+					if (quadriblockGameRunning && !quadriblock.conditions.waiting) {
+						quadriblock.blockRotate(0); quadriblock.render()
+					}
+					needsUpdate = true;
+					break;
+				case 'KeyZ':
+					//console.log('z')
+					if (quadriblockGameRunning && !quadriblock.conditions.waiting) {
+						quadriblock.blockRotate(1); quadriblock.render()
+					}
+					needsUpdate = true;
+					break;
+				case 'KeyC':
+					//console.log('c')
+					if (quadriblockGameRunning && !quadriblock.conditions.waiting) {
+						quadriblock.hold(); quadriblock.render()
+					}
+					needsUpdate = true;
+					break;
+				case 'ShiftLeft':
+				case 'ShiftRight':
+					//console.log('shift')
+					if (quadriblockGameRunning && !quadriblock.conditions.waiting) {
+						quadriblock.hold(); quadriblock.render()
+					}
+					needsUpdate = true;
+					break;
+				case 'ControlLeft':
+				case 'ControlLeft':
+					//console.log('control')
+					if (quadriblockGameRunning && !quadriblock.conditions.waiting) {
+						quadriblock.blockRotate(1); quadriblock.render()
+					}
 					needsUpdate = true;
 					break;
 			}

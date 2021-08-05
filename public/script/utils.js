@@ -552,12 +552,14 @@ function showTime(h = null, m = null) {
   var minutes_shift = 0n
 
   // 15 pins:
-  var separator = 2n**21n | 2n**51n
+  //var separator = 2n**21n | 2n**51n
   // 16 pins:
   //var separator = 2n**22n | 2n**54n
   // 17 pins:
-  //var separator = 2n**21n | 2n**51n
+  //var separator = 2n**23n | 2n**57n
   //var separator = 0n
+  //Generalized:
+  var separator = 2n**BigInt(pinthing.size.width+6) | 2n**BigInt(pinthing.size.width * 3 + 6)
 
   if (h == null) {
     var date_hours = new Date().getHours() % 12 || 12
