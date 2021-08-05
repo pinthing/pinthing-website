@@ -4,10 +4,17 @@ var plane, group, projector, objectHovered,
   objectFocusAtMouseDown, objectFocusAtMouseUp,
   isMouseDown = false, onMouseDownPosition = {};
 
+var pinthingDefaults = {
+  speed: 500,
+  width: 15,
+  length: 5
+}
+
 class PinThing {
   constructor(scene, width, length) {
     this.size = {width: width, length: length}
-    this.speed = 500
+    this.speed = pinthingDefaults.speed
+    this.halfHeight = 0.6
     this.interval = 0
 
     // Plane
@@ -70,8 +77,10 @@ class PinThing {
                 object.pin.material.color.g = object.color
                 object.pin.material.color.b = object.color
               } ).start()
+          } else if (pins[i].scale.y > 0.2) {
+            this.unHalf(i, 0)
           }
-        } else {
+        } else if (value[i] == 1) {
           if (pins[i].scale.y <= .1) {
             // Go up
             var tween = new TWEEN.Tween( { y: .1, pin: pins[i]} )
@@ -88,13 +97,99 @@ class PinThing {
                 object.pin.material.color.g = object.color
                 object.pin.material.color.b = object.color
               } ).start()
+          } else if (pins[i].scale.y < 0.9) {
+            this.unHalf(i, 1)
           }
+        } else if (value[i] == 2) {
+          if (i > -1) {this.half(i)}
         }
       }
     } else if (Number.isInteger(value)) {
       this.set(this.number2Array(value, this.size.width * this.size.length))
     } else if (typeof value == "bigint") {
       this.set(this.number2Array(value, this.size.width * this.size.length))
+    }
+  }
+
+  half(n) {
+    var pins = this.pins.children
+    var h = this.halfHeight
+    if (n < pins.length) {
+      if (pins[n].scale.y == 1) {
+        // Go down
+        var tween = new TWEEN.Tween( { y: 1, pin: pins[n]} )
+          .to( { y: h }, this.speed - 10 )
+          .easing( TWEEN.Easing.Cubic.InOut )
+          .onUpdate( (object) => {
+            object.pin.scale.y = object.y
+            object.pin.position.y = 2.5 * object.y
+          } ).start()
+        var tween2 = new TWEEN.Tween( { color: .12, pin: pins[n]} )
+          .to( { color: .18 }, this.speed - 10 )
+          .easing( TWEEN.Easing.Cubic.InOut )
+          .onUpdate( (object) => {
+            object.pin.material.color.g = object.color
+            object.pin.material.color.b = object.color
+          } ).start()
+      }
+      if (pins[n].scale.y <= .1) {
+        // Go up
+        var tween = new TWEEN.Tween( { y: .1, pin: pins[n]} )
+          .to( { y: h }, this.speed - 10 )
+          .easing( TWEEN.Easing.Cubic.InOut )
+          .onUpdate( (object) => {
+            object.pin.scale.y = object.y
+            object.pin.position.y = 2.5 * object.y
+          } ).start()
+        var tween2 = new TWEEN.Tween( { color: .25, pin: pins[n]} )
+          .to( { color: .18 }, this.speed - 10 )
+          .easing( TWEEN.Easing.Cubic.InOut )
+          .onUpdate( (object) => {
+            object.pin.material.color.g = object.color
+            object.pin.material.color.b = object.color
+          } ).start()
+      }
+    }
+  }
+
+  unHalf(n, upOrDown) {
+    var pins = this.pins.children
+    var h = this.halfHeight
+    if (n < pins.length && pins[n].scale.y == h) {
+      if (upOrDown == 0) {
+        // Go down
+        var tween = new TWEEN.Tween( { y: h, pin: pins[n]} )
+          .to( { y: .1 }, this.speed - 10 )
+          .easing( TWEEN.Easing.Cubic.InOut )
+          .onUpdate( (object) => {
+            object.pin.scale.y = object.y
+            object.pin.position.y = 2.5 * object.y
+          } ).start()
+        var tween2 = new TWEEN.Tween( { color: .18, pin: pins[n]} )
+          .to( { color: .25 }, this.speed - 10 )
+          .easing( TWEEN.Easing.Cubic.InOut )
+          .onUpdate( (object) => {
+            object.pin.material.color.g = object.color
+            object.pin.material.color.b = object.color
+          } ).start()
+      }
+      if (upOrDown == 1) {
+        // Go up
+        var tween = new TWEEN.Tween( { y: h, pin: pins[n]} )
+          .to( { y: 1 }, this.speed - 10 )
+          .easing( TWEEN.Easing.Cubic.InOut )
+          .onUpdate( (object) => {
+            object.pin.scale.y = object.y
+            object.pin.position.y = 2.5 * object.y
+          } ).start()
+        var tween2 = new TWEEN.Tween( { color: .18, pin: pins[n]} )
+          .to( { color: .12 }, this.speed - 10 )
+          .easing( TWEEN.Easing.Cubic.InOut )
+          .onUpdate( (object) => {
+            object.pin.material.color.g = object.color
+            object.pin.material.color.b = object.color
+          } ).start()
+      }
     }
   }
 
@@ -134,13 +229,19 @@ class PinThing {
 
 }
 
-init_pins()
-
-function init_pins() {
-  var pinthing = new PinThing(scene, 15, 5)
+function init_pins(width, length) {
+  if (scene.getObjectByName('pins') !== undefined) {
+    scene.remove(scene.getObjectByName('pins'))
+    scene.remove(scene.getObjectByName('plane'))
+  }
+  var pinthing = new PinThing(scene, width, length)
   window.pinthing = pinthing
   document.addEventListener( 'mousedown', onDocumentMouseDown, false )
 }
+
+window.pinthingDefaults = pinthingDefaults
+window.init_pins = init_pins
+init_pins(pinthingDefaults.width, pinthingDefaults.length)
 
 function onDocumentMouseDown( event ) {
   event.preventDefault()
