@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PinThing Help</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1c2428;
+      --muted: #667178;
+      --page: #f4f7f8;
+      --surface: #ffffff;
+      --soft: #edf1f3;
+      --line: rgba(21, 35, 41, 0.12);
+      --blue: #000b8d;
+      --red: #ff0c49;
+      --yellow: #f2c94c;
+      --shadow: 0 14px 42px rgba(24, 35, 40, 0.09);
+    }
+
+    html.dark {
+      color-scheme: dark;
+      --ink: #f3f1ea;
+      --muted: #a4adb2;
+      --page: #0a0d0e;
+      --surface: #181d20;
+      --soft: #22292d;
+      --line: rgba(255, 255, 255, 0.12);
+      --blue: #7580ff;
+      --shadow: 0 18px 48px rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { background: var(--page); }
+
+    body {
+      margin: 0;
+      min-width: 300px;
+      background: var(--page);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .brand-bar {
+      position: fixed;
+      z-index: 4;
+      inset: 0 0 auto;
+      height: 4px;
+      background: linear-gradient(90deg, var(--blue) 0 64%, var(--red) 64% 83%, var(--yellow) 83% 100%);
+    }
+
+    header {
+      position: sticky;
+      z-index: 3;
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 24px clamp(22px, 5vw, 48px) 18px;
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--page) 88%, transparent);
+      backdrop-filter: blur(18px) saturate(120%);
+    }
+
+    .eyebrow {
+      margin: 0 0 2px;
+      color: var(--red);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--blue);
+      font-size: clamp(23px, 4vw, 32px);
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+    }
+
+    html.dark h1 { color: var(--ink); }
+
+    button {
+      flex: 0 0 auto;
+      min-height: 34px;
+      padding: 0 13px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--surface);
+      color: var(--ink);
+      font: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:hover { border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); }
+    button:focus-visible { outline: 3px solid color-mix(in srgb, var(--blue) 25%, transparent); outline-offset: 2px; }
+
+    main {
+      width: min(940px, 100%);
+      margin: 0 auto;
+      padding: 28px clamp(18px, 5vw, 48px) 56px;
+    }
+
+    .intro {
+      max-width: 720px;
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    section {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    section.wide { grid-column: 1 / -1; }
+
+    h2 {
+      margin: 0;
+      padding: 16px 18px 12px;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+      letter-spacing: -0.01em;
+    }
+
+    dl { margin: 0; }
+
+    .item {
+      display: grid;
+      grid-template-columns: minmax(112px, 0.36fr) minmax(0, 1fr);
+      gap: 14px;
+      padding: 13px 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .item:last-child { border-bottom: 0; }
+
+    dt { font-weight: 750; }
+    dd { margin: 0; color: var(--muted); }
+
+    .icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+    .term { display: inline-flex; align-items: center; gap: 8px; }
+    .control-icon {
+      width: 17px;
+      height: 17px;
+      flex: 0 0 auto;
+      color: var(--blue);
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .icon-pair { display: inline-flex; align-items: center; gap: 3px; }
+    .icon-pair .control-icon { width: 15px; height: 15px; }
+    .player-control-icon {
+      display: inline-grid;
+      width: 22px;
+      height: 22px;
+      flex: 0 0 auto;
+      place-items: center;
+      padding-left: 1px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--soft);
+      color: var(--ink);
+      font-size: 9px;
+      line-height: 1;
+    }
+
+    .choices {
+      display: grid;
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    .choice {
+      display: grid;
+      grid-template-columns: minmax(104px, max-content) 1fr;
+      gap: 10px;
+    }
+
+    .choice b { color: var(--ink); font-size: 12px; }
+
+    kbd {
+      display: inline-grid;
+      min-width: 25px;
+      min-height: 24px;
+      place-items: center;
+      padding: 1px 7px;
+      border: 1px solid var(--line);
+      border-bottom-width: 2px;
+      border-radius: 6px;
+      background: var(--soft);
+      color: var(--ink);
+      font: 750 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    .parameter-values { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
+    .parameter-values kbd { min-height: 21px; font-size: 10px; }
+    .url-examples { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .url-example {
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+      padding: 10px 11px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--soft);
+      color: var(--muted);
+      text-decoration: none;
+      transition: border-color 140ms ease, transform 140ms ease;
+    }
+    .url-example:hover { border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); transform: translateY(-1px); }
+    .url-example code { overflow-wrap: anywhere; color: var(--ink); font: 750 11px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .url-example span { font-size: 11px; }
+
+    .note {
+      margin: 14px 0 0;
+      padding: 13px 15px;
+      border-left: 3px solid var(--yellow);
+      border-radius: 0 9px 9px 0;
+      background: color-mix(in srgb, var(--yellow) 13%, var(--surface));
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    footer {
+      padding-top: 22px;
+      color: var(--muted);
+      font-size: 11px;
+      text-align: center;
+    }
+
+    @media (max-width: 680px) {
+      .grid { grid-template-columns: 1fr; }
+      section.wide { grid-column: auto; }
+      .item { grid-template-columns: 1fr; gap: 4px; }
+      .choice { grid-template-columns: 1fr; gap: 1px; }
+      .url-examples { grid-template-columns: 1fr; }
+      header { align-items: flex-start; }
+    }
+  </style>
+  <script>
+    (() => {
+      const requested = new URLSearchParams(location.search).get('theme');
+      const dark = requested === 'dark' || (requested === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.classList.toggle('dark', dark);
+    })();
+  </script>
+</head>
+<body>
+  <div class="brand-bar" aria-hidden="true"></div>
+  <svg class="icon-sprite" aria-hidden="true">
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M5 14v4.5A1.5 1.5 0 006.5 20h11a1.5 1.5 0 001.5-1.5V14"/></symbol>
+    <symbol id="i-audio" viewBox="0 0 24 24"><path d="M5 9v6h4l5 4V5L9 9Z"/><path d="M17 9a4 4 0 010 6m2-8a7 7 0 010 10"/></symbol>
+    <symbol id="i-layout" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="7" rx="1.5"/><rect x="3" y="14" width="18" height="7" rx="1.5"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12s3.4-5.5 9.5-5.5 9.5 5.5 9.5 5.5-3.4 5.5-9.5 5.5S2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.5"/></symbol>
+    <symbol id="i-fullscreen" viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5m13 5h5v-5"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4.6 9A8 8 0 1120 12"/><path d="M4 4v5h5"/></symbol>
+    <symbol id="i-theme" viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><path d="M8 2v1m0 10v1M2 8h1m10 0h1M3.8 3.8l.7.7m7 7 .7.7M3.8 12.2l.7-.7m7-7 .7-.7"/><path d="M19.5 18.5a5 5 0 01-6-6 5.5 5.5 0 106 6Z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="19" r="1.4" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.7 9a2.45 2.45 0 014.75.82c0 1.82-2.45 2.05-2.45 3.68"/><path d="M12 17.25h.01"/></symbol>
+    <symbol id="i-zoom" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5M10.5 7.8v5.4M7.8 10.5h5.4"/></symbol>
+  </svg>
+  <header>
+    <div>
+      <p class="eyebrow">Reference guide</p>
+      <h1>PinThing Help</h1>
+    </div>
+    <button type="button" id="closeHelp" aria-label="Close help">Close</button>
+  </header>
+
+  <main>
+    <p class="intro"><strong>PinThing is a generative kinetic sculpture—a shape display brought to life through motion.</strong> This video simulator turns source frames into eight-height mechanical pin movement. Use this guide as a quick reference for every option and interaction.</p>
+
+    <div class="grid">
+      <section>
+        <h2>Source &amp; playback</h2>
+        <dl>
+          <div class="item">
+            <dt><span class="term"><svg class="control-icon"><use href="#i-upload"/></svg>Video source</span></dt>
+            <dd>Choose a bundled clip from the dropdown, or use the adjacent upload button to select a local MP4 or WebM. You can also drag a video onto the source section. Fortnite loads by default.</dd>
+          </div>
+          <div class="item">
+            <dt><span class="term"><span class="player-control-icon" aria-hidden="true">▶</span>Play / pause</span></dt>
+            <dd>Use the play button, click the original video, or press <kbd>P</kbd> from anywhere on the page.</dd>
+          </div>
+          <div class="item">
+            <dt>Timeline</dt>
+            <dd>Drag the red playhead to scrub, rewind, or jump to any available point in the video.</dd>
+          </div>
+          <div class="item">
+            <dt><span class="term"><svg class="control-icon"><use href="#i-audio"/></svg>Audio</span></dt>
+            <dd>Use the speaker button to mute or unmute and the adjacent slider to set volume. Playback starts muted so the video can autoplay reliably.</dd>
+          </div>
+          <div class="item">
+            <dt>Frame rate</dt>
+            <dd>Simulates a display updating at 5, 10, or 15 FPS. Source / original uses the clip’s natural update rate. Limited modes visibly hold both views while the pins travel toward each new target.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section>
+        <h2>Display &amp; image</h2>
+        <dl>
+          <div class="item">
+            <dt>Display size</dt>
+            <dd>
+              Changes the physical pixel matrix.
+              <div class="choices">
+                <span class="choice"><b>27″ diagonal</b><span>45 × 30 px · 1,350 pins</span></span>
+                <span class="choice"><b>93″ diagonal</b><span>168 × 87 px · 14,616 pins</span></span>
+                <span class="choice"><b>157″ diagonal</b><span>282 × 146 px · 41,172 pins</span></span>
+              </div>
+            </dd>
+          </div>
+          <div class="item">
+            <dt>Color</dt>
+            <dd>Applies posterized source-video color to each pin using eight values per RGB channel—up to 512 combined colors. Turn it off for a neutral metallic display driven only by luminance and depth.</dd>
+          </div>
+          <div class="item">
+            <dt>Specifications</dt>
+            <dd>Each pin is spaced 12.5 mm center-to-center and moves through eight discrete heights over 47 mm of total travel—approximately 6.7 mm between positions.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="wide">
+        <h2>Dithering</h2>
+        <dl>
+          <div class="item">
+            <dt>Blue noise</dt>
+            <dd>Distributes quantization texture with minimal visible repetition. Often the most natural-looking option for moving imagery.</dd>
+          </div>
+          <div class="item">
+            <dt>Floyd–Steinberg</dt>
+            <dd>Pushes quantization error into neighboring pins. Preserves gradients and detail, with a more organic diffusion texture.</dd>
+          </div>
+          <div class="item">
+            <dt>Clustered dots</dt>
+            <dd>Groups thresholds into visible dot-like structures, similar to graphic halftone screening.</dd>
+          </div>
+          <div class="item">
+            <dt>Bayer 4×4</dt>
+            <dd>Uses a repeating ordered threshold matrix. Produces stable, crisp patterns with little temporal noise.</dd>
+          </div>
+          <div class="item">
+            <dt>Off / Hard Threshold</dt>
+            <dd>Skips spatial dithering and maps luminance directly to the nearest of the eight physical pin heights.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section>
+        <h2>View controls</h2>
+        <dl>
+          <div class="item">
+            <dt><span class="term"><svg class="control-icon"><use href="#i-layout"/></svg>Layout</span></dt>
+            <dd>Switches between Stacked and Side by side. In Stacked view, the pin render is on top.</dd>
+          </div>
+          <div class="item">
+            <dt>Divider</dt>
+            <dd>Drag the divider to resize the two views. Double-click it to restore the default split. When focused, use the arrow keys; hold <kbd>Shift</kbd> for larger steps.</dd>
+          </div>
+          <div class="item">
+            <dt><span class="term"><svg class="control-icon"><use href="#i-eye"/></svg>Original / Render</span></dt>
+            <dd>The eye buttons independently show or hide the source video and 3D pin render. Render-only is the default view.</dd>
+          </div>
+          <div class="item">
+            <dt><span class="term"><svg class="control-icon"><use href="#i-fullscreen"/></svg>Fullscreen</span></dt>
+            <dd>Expands PinThing to the full screen. Use the same button—or your browser’s usual exit gesture—to return.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section>
+        <h2>3D camera &amp; interface</h2>
+        <dl>
+          <div class="item">
+            <dt>Orbit</dt>
+            <dd>Drag on the pin render to rotate around the display. Right-drag to pan and use the mouse wheel or trackpad to zoom.</dd>
+          </div>
+          <div class="item">
+            <dt><span class="term"><svg class="control-icon"><use href="#i-reset"/></svg>Reset view</span></dt>
+            <dd>The circular-arrow button returns the camera to its original framing.</dd>
+          </div>
+          <div class="item">
+            <dt><span class="term"><svg class="control-icon"><use href="#i-theme"/></svg>Theme</span></dt>
+            <dd>Cycles through Light, Dark, and System. System follows the operating-system appearance setting.</dd>
+          </div>
+          <div class="item">
+            <dt><span class="term"><span class="icon-pair"><svg class="control-icon"><use href="#i-menu"/></svg><svg class="control-icon"><use href="#i-help"/></svg></span>Control panel</span></dt>
+            <dd>The three-dot button opens or collapses the panel. The question-mark button opens this guide.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="wide">
+        <h2>Zoom mode</h2>
+        <dl>
+          <div class="item">
+            <dt>What it does</dt>
+            <dd>Shows how a physical 45 × 30 display would render a selected portion of a larger virtual display, instead of compressing the entire source frame into 45 × 30 pins.</dd>
+          </div>
+          <div class="item">
+            <dt><span class="term"><svg class="control-icon"><use href="#i-zoom"/></svg>How to use it</span></dt>
+            <dd>With the 27″ / 45 × 30 display selected, click the magnifying-glass button. Move over the original video to position the highlighted capture area.</dd>
+          </div>
+          <div class="item">
+            <dt>Mode cycle</dt>
+            <dd>Each click advances through Off → 93″ source grid → 157″ source grid → Off. The yellow overlay identifies the active larger source grid.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="wide">
+        <h2>URL parameters</h2>
+        <dl>
+          <div class="item">
+            <dt><kbd>v</kbd> Video</dt>
+            <dd>
+              Loads a bundled alias or an MP4/WebM filename from the project folder.
+              <span class="parameter-values"><kbd>ft</kbd><span>Fortnite</span><kbd>ba</kbd><span>Bad Apple</span><kbd>cm</kbd><span>Larry Cube - Calculated Movements</span><kbd>my-loop.webm</kbd><span>Filename</span></span>
+            </dd>
+          </div>
+          <div class="item">
+            <dt><kbd>view</kbd> View</dt>
+            <dd>
+              Chooses which panes appear and how two visible panes are arranged. Render-only is used when this parameter is omitted.
+              <span class="parameter-values"><kbd>r</kbd><span>Render only</span><kbd>o</kbd><span>Original only</span><kbd>st</kbd><span>Stacked</span><kbd>sb</kbd><span>Side by side</span></span>
+            </dd>
+          </div>
+          <div class="item">
+            <dt><kbd>split</kbd> Divider</dt>
+            <dd>Sets the first pane’s percentage when both panes are visible. Values are constrained from 20 to 80. For example, <kbd>split=60</kbd>.</dd>
+          </div>
+          <div class="item">
+            <dt><kbd>color</kbd> Pin color</dt>
+            <dd>Starts the pin render with posterized color enabled or disabled. Use <kbd>color=on</kbd> or <kbd>color=off</kbd>. Color is on when this parameter is omitted.</dd>
+          </div>
+          <div class="item">
+            <dt>Examples</dt>
+            <dd class="url-examples">
+              <a class="url-example" href="./?v=ft&amp;view=st" target="_top"><code>?v=ft&amp;view=st</code><span>Fortnite · Original and render stacked</span></a>
+              <a class="url-example" href="./?v=ba&amp;view=sb" target="_top"><code>?v=ba&amp;view=sb</code><span>Bad Apple · Side by side</span></a>
+              <a class="url-example" href="./?v=cm&amp;view=r" target="_top"><code>?v=cm&amp;view=r</code><span>Larry Cube - Calculated Movements · Render only</span></a>
+              <a class="url-example" href="./?v=ba&amp;view=r&amp;color=off" target="_top"><code>?v=ba&amp;view=r&amp;color=off</code><span>Bad Apple · Metallic render without color</span></a>
+              <a class="url-example" href="./?v=ft&amp;view=sb&amp;split=60" target="_top"><code>?v=ft&amp;view=sb&amp;split=60</code><span>Fortnite · Side by side at 60 / 40</span></a>
+            </dd>
+          </div>
+        </dl>
+      </section>
+    </div>
+
+    <p class="note"><strong>Performance note:</strong> the larger matrices create many more rendered pins. If interaction becomes sluggish, use the 45 × 30 display while composing the scene, then switch to a larger size for evaluation.</p>
+    <footer>PinThing · Shape Display Video Simulator</footer>
+  </main>
+  <script>
+    function closeHelp() {
+      if (window.parent !== window) window.parent.postMessage('pinthing-close-help', location.origin);
+      else window.close();
+    }
+    document.querySelector('#closeHelp').addEventListener('click', closeHelp);
+    addEventListener('keydown', event => {
+      if (event.key === 'Escape' && window.parent !== window) closeHelp();
+    });
+  </script>
+</body>
+</html>
